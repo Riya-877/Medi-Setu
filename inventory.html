@@ -755,7 +755,7 @@
   }
 
   /* ══ ADD MEDICINE ══ */
-  function addMedicine() {
+  async function addMedicine() {
     const name     = document.getElementById('m-name').value.trim();
     const cat      = document.getElementById('m-cat').value;
     const units    = parseInt(document.getElementById('m-units').value);
@@ -807,7 +807,7 @@
   }
 
   /* ══ DELETE ══ */
-  function deleteMed(id) {
+  async function deleteMed(id) {
     const m = medicines.find(x=>x.id===id);
     if (!m) return;
     if (!confirm(`Delete "${m.name}"? This cannot be undone.`)) return;

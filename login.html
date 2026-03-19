@@ -1147,7 +1147,7 @@
   }
 
   /* ── SUBMIT ── */
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     clearErrors();
     let ok = true;
@@ -1261,7 +1261,13 @@
 
     } catch (err) {
       btn.classList.remove('loading');
-      showToast(err.message || 'Something went wrong', 'err');
+      console.error('Auth error full:', err);
+      // Show detailed error
+      let msg = err.message || 'Something went wrong';
+      if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
+        msg = 'Cannot reach server. Make sure backend is running at localhost:5000';
+      }
+      showToast(msg, 'err');
     }
   }
 
@@ -1431,5 +1437,8 @@
     return ok;
   }
 </script>
+<script src="api.js"></script>
+<script src="i18n.js"></script>
+<script src="nav.js"></script>
 </body>
 </html>
